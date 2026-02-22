@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "irq-canvas": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory", "/path/to/irq-canvas-mcp",
+        "irq-canvas-mcp"
+      ],
+      "env": {
+        "CANVAS_API_TOKEN": "your-canvas-api-token",
+        "CANVAS_API_URL": "https://your-institution.instructure.com/api/v1"
+      }
+    }
+  }
+}

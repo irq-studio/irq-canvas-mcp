@@ -1,0 +1,143 @@
+# Multi-School Canvas Configuration Example
+# This file supports connecting to multiple schools/institutions running Canvas LMS
+# 
+# Copy this file to 'canvas-instances.yml' and update with your actual configuration
+
+# Default instance to use when none specified
+default_instance: "school_production"
+
+# Canvas Instance Definitions - Add your schools here
+instances:
+  # Your Primary School (Production)
+  school_production:
+    name: "Your School Name - Production"
+    base_url: "https://yourschool.instructure.com"
+    api_token: "${YOUR_SCHOOL_CANVAS_TOKEN}"  # Environment variable (RECOMMENDED)
+    account_id: null
+    environment: "production"
+    description: "Main production Canvas environment"
+    institution_type: "community_college"  # Options: community_college, university, private_university, technical_college
+    location: "Your City, State"
+    
+  # Your School Development Environment (Optional)
+  school_development:
+    name: "Your School Name - Development"
+    base_url: "https://yourschool-dev.instructure.com"
+    api_token: "${YOUR_SCHOOL_DEV_CANVAS_TOKEN}"  # Environment variable
+    account_id: null
+    environment: "development"
+    description: "Development/testing Canvas environment"
+    institution_type: "community_college"
+    location: "Your City, State"
+    
+  # Second School Example (if teaching at multiple institutions)
+  second_school:
+    name: "Second Institution Name"
+    base_url: "https://secondschool.edu"
+    api_token: "${SECOND_SCHOOL_CANVAS_TOKEN}"  # Environment variable
+    account_id: null
+    environment: "production"
+    description: "Second institution Canvas instance"
+    institution_type: "university"
+    location: "Other City, State"
+    
+  # Third School Example (Community College)
+  community_college:
+    name: "Community College Name"
+    base_url: "https://communityschool.instructure.com"
+    api_token: "${CC_CANVAS_TOKEN}"  # Environment variable
+    account_id: null
+    environment: "production"
+    description: "Community college Canvas instance"
+    institution_type: "community_college"
+    location: "College City, State"
+    
+# Course Mappings per School/Instance
+course_mappings:
+  # Your Primary School Courses
+  school_production:
+    courses:
+      - name: "COURSE-101"
+        canvas_id: 1234567  # Replace with actual Canvas course ID
+        course_code: "COURSE-101"
+        course_title: "Introduction to Subject"
+        term: "Fall 2024"
+        status: "active"
+        credits: 3
+        
+      - name: "COURSE-201"  
+        canvas_id: 1234568  # Replace with actual Canvas course ID
+        course_code: "COURSE-201"
+        course_title: "Advanced Subject"
+        term: "Fall 2024"
+        status: "active"
+        credits: 4
+        
+  # Development Environment Courses (typically same courses, different IDs)
+  school_development:
+    courses:
+      - name: "COURSE-101"
+        canvas_id: 9999987  # Different ID in dev environment
+        course_code: "COURSE-101-DEV"
+        course_title: "Introduction to Subject (Dev)"
+        term: "Fall 2024"
+        status: "active"
+        credits: 3
+        
+  # Second School Courses
+  second_school:
+    courses:
+      - name: "CS-200"
+        canvas_id: 987654  # Replace with actual Canvas course ID
+        course_code: "CS-200"
+        course_title: "Computer Science Fundamentals"
+        term: "Fall 2024"
+        status: "active"
+        credits: 3
+        
+      - name: "CS-300"
+        canvas_id: 987655  # Replace with actual Canvas course ID
+        course_code: "CS-300"
+        course_title: "Data Structures"
+        term: "Fall 2024"
+        status: "active"
+        credits: 3
+        
+  # Community College Courses
+  community_college:
+    courses:
+      - name: "INTRO-100"
+        canvas_id: 456789  # Replace with actual Canvas course ID
+        course_code: "INTRO-100"
+        course_title: "Introduction to Technology"
+        term: "Spring 2025"
+        status: "active"
+        credits: 4
+        
+# Global Settings
+global_settings:
+  timeout: 30
+  retry_attempts: 3
+  rate_limit: 
+    requests_per_second: 5
+    burst_limit: 20
+  
+# Environment Variable Configuration
+# IMPORTANT: Set these in your shell environment or .env file for security
+# 
+# Add to your shell profile (.bashrc, .zshrc, etc.):
+# export YOUR_SCHOOL_CANVAS_TOKEN="7~your_actual_token_here"
+# export YOUR_SCHOOL_DEV_CANVAS_TOKEN="7~your_dev_token_here"
+# export SECOND_SCHOOL_CANVAS_TOKEN="7~your_second_school_token_here"
+# export CC_CANVAS_TOKEN="7~your_community_college_token_here"
+#
+# HOW TO GET API TOKENS:
+# 1. Log into your Canvas instance
+# 2. Go to Account → Settings
+# 3. Scroll to "Approved Integrations" 
+# 4. Click "+ New Access Token"
+# 5. Set purpose (e.g., "Canvas Multi-School Management")
+# 6. Set expiration date (optional but recommended)
+# 7. Click "Generate Token"
+# 8. Copy the token immediately (you won't be able to see it again)
+# 9. Add to your environment variables as shown above
